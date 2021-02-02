@@ -26,7 +26,7 @@ module.exports = app => {
             let newNote = req.body;
             //pushing newNote request to notes variable
             notes.push(newNote);
-            //calling updateDb
+            //calling updateDb, which appends stringified notes to db.json
             updateDb();
             return console.log("Added new note: " + newNote.title);
         });
@@ -44,9 +44,8 @@ module.exports = app => {
             console.log("Deleted note with id "+req.params.id);
         });
 
-        // VIEW ROUTES
-        // ========================================================
 
+        // VIEW ROUTES
         // Display notes.html when /notes is accessed
         app.get('/notes', function(req,res) {
             res.sendFile(path.join(__dirname, "../public/notes.html"));
