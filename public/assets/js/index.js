@@ -1,3 +1,6 @@
+// ISSUES!! -- Can't add note to sidebar until I refresh, 
+// when I click on delete button, nothin on page deletes BUT everything from db.json deletes
+// addes note to db.json first, then to add it page, I have to refresh
 const $noteTitle = $(".note-title");
 const $noteText = $(".note-textarea");
 const $saveNoteBtn = $(".save-note");
