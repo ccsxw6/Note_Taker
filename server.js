@@ -17,7 +17,6 @@ let notes_data = [];
 // When api/notes is visited, read db.json file, add it to notes_data array, send notes_data to response
 app.get("/api/notes", function (err, res) {
   notes_data = fs.readFileSync("Develop/db/db.json", "utf8");
-  console.log("api/notes page");
   notes_data = JSON.parse(notes_data);
 
   if (err) {
@@ -30,11 +29,8 @@ app.get("/api/notes", function (err, res) {
 // When there's a post request, read db.json, 
 app.post("/api/notes", function (req, res) {
   notes_data = fs.readFileSync("./Develop/db/db.json", "utf8");
-  console.log(notes_data);
-
   notes_data = JSON.parse(notes_data);
   req.body.id = notes_data.length;
-  //pushing json notes_data to req.body
   notes_data.push(req.body);
   notes_data = JSON.stringify(notes_data);
 
@@ -59,7 +55,6 @@ app.delete("/api/notes/:id", function (req, res) {
   });
   res.send(JSON.parse(notes_data));
   if (err) throw err;
-  console.log(err);
 });
 
 // HTML GET Requests
