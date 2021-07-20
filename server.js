@@ -8,20 +8,23 @@ const fs = require("fs");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// middleware 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "Develop/public")));
 
 
+// empty array to hold notes data
 let notes_data = [];
 
-// routes
+// routes - defined in index.js
 
-// When api/notes is visited, read db.json file, add it to notes_data array, send notes_data to response
+// GET Route to /api/notes 
 app.get("/api/notes", function (err, res) {
+  // setting notes_data to the contents of this file
   notes_data = fs.readFileSync("Develop/db/db.json", "utf8");
+  // parsing db.json file to json 
   notes_data = JSON.parse(notes_data);
-
   if (err) {
     console.log(err);
   }
@@ -29,7 +32,8 @@ app.get("/api/notes", function (err, res) {
 });
 
 
-// When there's a post request, read db.json, 
+// Post route to /api/notes
+// stores user's information in the db.json file
 app.post("/api/notes", function (req, res) {
   notes_data = fs.readFileSync("./Develop/db/db.json", "utf8");
   notes_data = JSON.parse(notes_data);
@@ -73,8 +77,7 @@ app.get("/api/notes", function (req, res) {
   return res.sendFile(path.json(__dirname, "Develop/db/db.json"));
 });
 
-
-
+// listening for express server
 app.listen(PORT, function () {
   console.log("SERVER IS LISTENING: " + PORT);
 });

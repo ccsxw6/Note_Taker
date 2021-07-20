@@ -5,9 +5,10 @@ var $newNoteBtn = $(".new-note");
 var $noteList = $(".list-container .list-group");
 
 // activeNote is used to keep track of the note in the textarea
+// using this instead of a legitimate database
 var activeNote = {};
 
-// A function for getting all notes from the db
+// ajax get request to /api/notes
 var getNotes = function() {
   return $.ajax({
     url: "/api/notes",
@@ -15,7 +16,7 @@ var getNotes = function() {
   });
 };
 
-// A function for saving a note to the db
+// POST request - save note to db
 var saveNote = function(note) {
   return $.ajax({
     url: "/api/notes",
@@ -24,7 +25,7 @@ var saveNote = function(note) {
   });
 };
 
-// A function for deleting a note from the db
+// DELETE request 
 var deleteNote = function(id) {
   return $.ajax({
     url: "api/notes/" + id,
@@ -32,11 +33,12 @@ var deleteNote = function(id) {
   });
 };
 
-// If there is an activeNote, display it, otherwise render empty inputs
+// If there is an activeNote, display the active note, otherwise render empty inputs
 var renderActiveNote = function() {
   $saveNoteBtn.hide();
 
   if (activeNote.id) {
+    console.log(activeNote.id)
     $noteTitle.attr("readonly", true);
     $noteText.attr("readonly", true);
     $noteTitle.val(activeNote.title);
@@ -50,15 +52,15 @@ var renderActiveNote = function() {
 };
 
 // Get the note data from the inputs, save it to the db and update the view
+// after clicking save button, create a note object with the title and the notes
 var handleNoteSave = function() {
   var newNote = {
     title: $noteTitle.val(),
     text: $noteText.val()
   };
-
-  //calling save note with newNote param
-  // 
+  //make a post request with newNote object
   saveNote(newNote).then(function(data) {
+    console.log(newNote)
     getAndRenderNotes();
     renderActiveNote();
   });
@@ -105,7 +107,7 @@ var handleRenderSaveBtn = function() {
   }
 };
 
-// Render's the list of note titles
+// Render's the list of note titles in the sidebar
 var renderNoteList = function(notes) {
   $noteList.empty();
 
@@ -119,7 +121,6 @@ var renderNoteList = function(notes) {
     var $delBtn = $(
       "<i class='fas fa-trash-alt float-right text-danger delete-note'>"
     );
-
     $li.append($span, $delBtn);
     noteListItems.push($li);
   }
