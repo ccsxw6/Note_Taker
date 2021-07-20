@@ -1,4 +1,3 @@
-  
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,14 +13,15 @@
 </head>
 
 <body>
+  <!-- Navbar with save icon and new note icon -->
   <nav class="navbar navbar-dark bg-dark">
-    <a class="navbar-brand" href="/">Note Taker
-    </a>
+    <a class="navbar-brand" href="/">Note Taker</a>
     <div class="icons">
       <i class="fas fa-save text-light save-note"></i>
       <i class="fas fa-pen text-light new-note"></i>
     </div>
   </nav>
+  <!-- container to hold saved notes -->
   <div class="container-fluid">
     <div class="row">
       <div class="col-4 list-container">
@@ -30,6 +30,7 @@
           </ul>
         </div>
       </div>
+      <!-- text area to write notes -->
       <div class="col-8">
         <input class="note-title" placeholder="Note Title" maxlength="28" type="text">
         <textarea class="note-textarea" placeholder="Note Text"></textarea>

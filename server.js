@@ -1,5 +1,8 @@
+// sets up server
 const express = require("express");
+// provides a way of working with directories and file paths.
 const path = require("path");
+// works with files on system; eg read, create, update files
 const fs = require("fs");
 
 const app = express();
